@@ -7,8 +7,20 @@ Electron, React, Typescript, TailwindCSS
 
 ## General Project Overview
 
-```
-└── 📁NoteDrop
+```bash
+└── 📁md-notes
+    └── 📁.vscode
+        └── extensions.json
+        └── launch.json
+        └── settings.json
+    └── 📁build
+        └── entitlements.mac.plist
+        └── icon.icns
+        └── icon.ico
+        └── icon.png
+    └── 📁resources
+        └── icon.png
+        └── NoteDrop_Structure.png
     └── 📁src
         └── 📁main
             └── index.ts
@@ -18,16 +30,13 @@ Electron, React, Typescript, TailwindCSS
         └── 📁renderer
             └── 📁src
                 └── 📁assets
-                    └── base.css
-                    └── electron.svg
-                    └── main.css
-                    └── wavy-lines.svg
+                    └── index.css
                 └── 📁components
-                    └── Versions.tsx
                 └── App.tsx
                 └── env.d.ts
                 └── main.tsx
             └── index.html
+    └── .DS_Store
     └── .editorconfig
     └── .eslintignore
     └── .eslintrc.cjs
@@ -45,6 +54,7 @@ Electron, React, Typescript, TailwindCSS
 ```
 
 ## Working Background
+
 ![Project Structure](./resources/NoteDrop_Structure.png)
 
 ## Project Setup
