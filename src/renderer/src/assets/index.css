@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    #root{
+        @apply h-full;
+    }
+    html, body {
+        @apply h-full;
+
+        /* desktop applications doesn't have selection of text so im just gonna keep it disabled */
+        @apply select-none;  
+
+        @apply bg-transparent;
+
+        @apply font-medium antialiased text-white;
+
+        @apply overflow-hidden; /* hiding all the content that overflows the window */
+    }
+
+
+}
