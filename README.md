@@ -1,10 +1,51 @@
-# md-notes
+# NoteDrop
 
-An Electron application with React and TypeScript
+NoteDrop is a simple mark-down app just like AppleNotes but built with Electron, React, and Typescript.
 
-## Recommended IDE Setup
+## Tech Stacks currently used:
+Electron, React, Typescript, TailwindCSS
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## General Project Overview
+
+```
+└── 📁NoteDrop
+    └── 📁src
+        └── 📁main
+            └── index.ts
+        └── 📁preload
+            └── index.d.ts
+            └── index.ts
+        └── 📁renderer
+            └── 📁src
+                └── 📁assets
+                    └── base.css
+                    └── electron.svg
+                    └── main.css
+                    └── wavy-lines.svg
+                └── 📁components
+                    └── Versions.tsx
+                └── App.tsx
+                └── env.d.ts
+                └── main.tsx
+            └── index.html
+    └── .editorconfig
+    └── .eslintignore
+    └── .eslintrc.cjs
+    └── .gitignore
+    └── .prettierignore
+    └── .prettierrc.yaml
+    └── electron-builder.yml
+    └── electron.vite.config.ts
+    └── package-lock.json
+    └── package.json
+    └── README.md
+    └── tsconfig.json
+    └── tsconfig.node.json
+    └── tsconfig.web.json
+```
+
+## Working Background
+![Project Structure](./resources/NoteDrop_Structure.png)
 
 ## Project Setup
 
@@ -13,8 +54,6 @@ An Electron application with React and TypeScript
 ```bash
 $ npm install
 ```
-
-### Development
 
 ```bash
 $ npm run dev
@@ -32,6 +71,3 @@ $ npm run build:mac
 # For Linux
 $ npm run build:linux
 ```
-
-## Tech Stacks Used:
-Electron, React, Typescript
