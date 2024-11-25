@@ -1,11 +1,14 @@
-import { Content, RootLayout, Sidebar } from '@/components'
+import { Content, RootLayout, Sidebar, DragTopBar } from '@/components'
 
-function App() {
+const App = () => {
   return (
-    <RootLayout>
-      <Sidebar className="p-3">Sidebar</Sidebar>
-      <Content className="p-2 border-l border-l-white/20 bg-zinc-950/50">Content Page</Content>
-    </RootLayout>
+    <>
+      <DragTopBar />
+      <RootLayout>
+        <Sidebar className="p-3">Sidebar</Sidebar>
+        <Content className="p-2 border-l border-l-white/20 bg-zinc-950/50">Content Page</Content>
+      </RootLayout>
+    </>
   )
 }
 

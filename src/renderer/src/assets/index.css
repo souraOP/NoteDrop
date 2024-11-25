@@ -8,16 +8,15 @@
     }
     html, body {
         @apply h-full;
-
-        /* desktop applications doesn't have selection of text so im just gonna keep it disabled */
-        @apply select-none;  
-
+        @apply select-none; /* desktop applications doesn't have selection of text so im just gonna keep it disabled */
         @apply bg-transparent;
-
         @apply font-medium antialiased text-white;
-
         @apply overflow-hidden; /* hiding all the content that overflows the window */
     }
-
-
+    header {
+        -webkit-app-region: drag;
+    }
+    button {
+        -webkit-app-region: no-drag;
+    }
 }
