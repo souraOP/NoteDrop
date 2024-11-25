@@ -1,8 +1,11 @@
+import { Content, RootLayout, Sidebar } from '@/components'
+
 function App() {
   return (
-    <div className="flex h-full items-center justify-center">
-      <span className="text-4xl text-blue-600">NoteDrop.inc</span>
-    </div>
+    <RootLayout>
+      <Sidebar className="p-3">Sidebar</Sidebar>
+      <Content className="p-2 border-l border-l-white/20 bg-zinc-950/50">Content Page</Content>
+    </RootLayout>
   )
 }
 

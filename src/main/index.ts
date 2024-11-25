@@ -11,6 +11,13 @@ function createWindow(): void {
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
+    center: true,
+    title: 'NoteDrop',
+    vibrancy: 'under-window',
+    visualEffectState: 'active',
+    titleBarStyle: 'hidden',
+    trafficLightPosition: { x: 16, y: 12 },
+    frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: true, //sandboxes our renderer process to make it more secure.
