@@ -4,7 +4,9 @@ import {
   Sidebar,
   DragTopBar,
   ServiceButtonContainer,
-  PreviewNoteLists
+  PreviewNoteLists,
+  MarkdownEditor,
+  NoteTitle
 } from '@/components'
 
 const App = () => {
@@ -16,7 +18,10 @@ const App = () => {
           <ServiceButtonContainer className="flex justify-between mt-1" />
           <PreviewNoteLists className="mt-3 space-y-2" />
         </Sidebar>
-        <Content className="p-2 border-l border-l-white/20 bg-zinc-950/50">Content Page</Content>
+        <Content className="p-2 border-l border-l-white/20 bg-zinc-950/50">
+          <NoteTitle className="pt-2"/>
+          <MarkdownEditor />
+        </Content>
       </RootLayout>
     </>
   )
