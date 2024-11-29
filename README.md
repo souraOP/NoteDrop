@@ -4,7 +4,7 @@ NoteDrop is a simple mark-down app just like AppleNotes but built with Electron,
 
 ## Tech Stacks currently used
 
-Electron, React, Typescript, TailwindCSS, MDXEditor, tailwind-merge, clsx, tailwindcss-typography
+Electron, React, Typescript, TailwindCSS, MDXEditor, tailwind-merge, clsx, tailwindcss-typography, Jotai
 
 ## General Project Overview
 
