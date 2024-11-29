@@ -4,8 +4,8 @@ import { mockupNotes } from '@renderer/store/mocks'
 import { ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export const PreviewNoteLists = ({ className, ...props }: ComponentProps<'ul'>) => {
-  const { notes, indexOfSelectedNote, handleSelectedNote } = useNotesList({})
+export const PreviewNoteLists = ({ onSelect, className, ...props }: ComponentProps<'ul'>) => {
+  const { notes, indexOfSelectedNote, handleSelectedNote } = useNotesList({ onSelect })
 
   // if there were no notes then display no notes created as of now!
   if (notes.length === 0) {
