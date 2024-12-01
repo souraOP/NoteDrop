@@ -2,6 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { getAllNotes } from '@/lib'
+import { GetNotes } from '@shared/types'
 
 function createWindow(): void {
   // Create the browser window.
@@ -59,6 +61,9 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  // this ipcMain channel will help in communicating with the preloadjs file
+  ipcMain.handle('getAllNotes', (_, ...args: Parameters<GetNotes>) => getAllNotes(...args))
 
   createWindow()
 
