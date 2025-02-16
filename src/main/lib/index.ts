@@ -2,13 +2,10 @@
 
 import { appDirectoryName, fileEncoding } from '@shared/constant'
 import { NoteInfo } from '@shared/models'
-import { GetNotes } from '@shared/types'
+import { GetNotes, ReadNote } from '@shared/types'
 import { promises as fs } from 'fs'
-import { readdir, stat } from 'fs-extra'
+import { readdir, stat, readFile } from 'fs-extra'
 import { homedir } from 'os'
-
-// Installed fs-extra library which adds file system methods that aren't included in the native fs module
-// https://www.npmjs.com/package/fs-extra
 
 // get the root directory of our notes application
 
@@ -18,7 +15,7 @@ export const getRootDirectory = () => {
 
 // get the Notes from the directory with .md extension
 export const getAllNotes: GetNotes = async () => {
-  // 1. get the root directory before accesing any notes
+  // 1. getting the root directory before accesing any notes
   const rootDirectory = getRootDirectory()
 
   // 2. check if the directory exists, if exists -> exit, if not then create the directory
@@ -52,4 +49,9 @@ export const getNoteInfoFromFileName = async (fileName: string): Promise<NoteInf
     title: fileName.replace(/\.md$/, ''), // regular expression taken from AI.. it will take the fileName without the .md extension
     lastUpdatedTime: statsOfFile.mtimeMs // this returns the last edit times in ms the file was edited
   }
+}
+
+export const readNote: ReadNote = async (filename) => {
+  const rootDirectory = getRootDirectory()
+  return readFile(`${rootDirectory}/${filename}.md`, { encoding: fileEncoding })
 }

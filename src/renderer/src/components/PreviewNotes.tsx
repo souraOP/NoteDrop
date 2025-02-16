@@ -17,7 +17,6 @@ export const PreviewNotes = ({
   const formattedDate = MilisecondToDateFormatConverter(lastUpdatedTime)
   return (
     <div
-      {...props}
       className={cn(
         'cursor-pointer px-2.5 py-3 rounded-lg transition-colors duration-75',
         {
@@ -26,6 +25,7 @@ export const PreviewNotes = ({
         },
         className
       )}
+      {...props}
     >
       <h3 className="truncate mb-1 font-bold">{title}</h3>
       <span className="inline-block text-xs font-light w-full text-left mb-2">{formattedDate}</span>
