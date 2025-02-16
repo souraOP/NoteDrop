@@ -1,6 +1,6 @@
 // here I will store all the atoms that jotai uses.
 
-import { NoteInfo } from '@shared/models'
+import { NoteInfo, NoteContent } from '@shared/models'
 import { atom } from 'jotai'
 import { mockupNotes } from './mocks'
 import { unwrap } from 'jotai/utils'
@@ -76,9 +76,32 @@ const selectedNoteAtomAsync = atom(async (get) => {
 export const selectedNoteAtom = unwrap(
   selectedNoteAtomAsync,
   (prev) =>
-    prev ?? {   // if note content is empty or new
+    prev ?? {
+      // if note content is empty or new
       title: '',
       content: '',
       lastUpdatedTime: Date.now()
     }
 )
+
+export const savingNoteAtom = atom(null, async (get, set, updatedContent: NoteContent) => {
+  const notes = get(noteAtom)
+  const selectedNote = get(selectedNoteAtom)
+  if (!notes || !selectedNote) {
+    return
+  }
+  await window.context.writeNote(selectedNote.title, updatedContent)
+  // update time
+  set(
+    noteAtom,
+    notes.map((note) => {
+      if (note.title === selectedNote.title) {
+        return {
+          ...note,
+          lastUpdatedTime: Date.now()
+        }
+      }
+      return note
+    })
+  )
+})

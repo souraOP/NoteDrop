@@ -2,8 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { getAllNotes, readNote } from '@/lib'
-import { GetNotes, ReadNote } from '@shared/types'
+import { getAllNotes, readNote, writeNote } from '@/lib'
+import { GetNotes, ReadNote, WriteNote } from '@shared/types'
 
 function createWindow(): void {
   // Create the browser window.
@@ -65,6 +65,7 @@ app.whenReady().then(() => {
   // this ipcMain channel will help in communicating with the preloadjs file
   ipcMain.handle('getAllNotes', (_, ...args: Parameters<GetNotes>) => getAllNotes(...args))
   ipcMain.handle('readNote', (_, ...args: Parameters<ReadNote>) => readNote(...args))
+  ipcMain.handle('writeNote', (_, ...args: Parameters<WriteNote>) => writeNote(...args))
 
   createWindow()
 
