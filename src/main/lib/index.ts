@@ -2,9 +2,9 @@
 
 import { appDirectoryName, fileEncoding } from '@shared/constant'
 import { NoteInfo } from '@shared/models'
-import { GetNotes, ReadNote } from '@shared/types'
+import { GetNotes, ReadNote, WriteNote } from '@shared/types'
 import { promises as fs } from 'fs'
-import { readdir, stat, readFile } from 'fs-extra'
+import { readdir, stat, readFile, writeFile } from 'fs-extra'
 import { homedir } from 'os'
 
 // get the root directory of our notes application
@@ -54,4 +54,10 @@ export const getNoteInfoFromFileName = async (fileName: string): Promise<NoteInf
 export const readNote: ReadNote = async (filename) => {
   const rootDirectory = getRootDirectory()
   return readFile(`${rootDirectory}/${filename}.md`, { encoding: fileEncoding })
+}
+
+export const writeNote: WriteNote = async (filename, content) => {
+  const rootDirectory = getRootDirectory()
+  console.info(`Writing the note ${filename}`)
+  return writeFile(`${rootDirectory}/${filename}.md`, content, { encoding: fileEncoding })
 }

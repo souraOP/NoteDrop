@@ -1,4 +1,4 @@
-import { GetNotes, ReadNote } from '@shared/types'
+import { GetNotes, ReadNote, WriteNote } from '@shared/types'
 import { contextBridge } from 'electron'
 import { ipcRenderer } from 'electron/renderer'
 
@@ -12,7 +12,8 @@ try {
     // will do later
     locale: navigator.language,
     getAllNotes: (...args: Parameters<GetNotes>) => ipcRenderer.invoke('getAllNotes', ...args),
-    readNote: (...args: Parameters<ReadNote>) => ipcRenderer.invoke('readNote', ...args)
+    readNote: (...args: Parameters<ReadNote>) => ipcRenderer.invoke('readNote', ...args),
+    writeNote: (...args: Parameters<WriteNote>) => ipcRenderer.invoke('writeNote', ...args)
   })
 } catch (error) {
   console.error(error)
