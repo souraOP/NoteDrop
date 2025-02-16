@@ -13,7 +13,6 @@ export const MarkdownEditor = () => {
   if (!selectedNote) return null
 
   return (
-    // In the MDXEditor Docs, contentEditableClassName allows us to perform content styling thus here we are doing it with tailwindcss
     <MDXEditor
       key={selectedNote.title}
       markdown={selectedNote.content}

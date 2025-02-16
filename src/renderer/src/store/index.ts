@@ -3,10 +3,18 @@
 import { NoteInfo } from '@shared/models'
 import { atom } from 'jotai'
 import { mockupNotes } from './mocks'
+import { unwrap } from 'jotai/utils'
 
-// notes atom will store all the notes
-// it will be an array
-export const noteAtom = atom<NoteInfo[]>(mockupNotes) // as of now taking notes from the mockup notes only but it will take from local files
+const loadNotes = async () => {
+  const notes = await window.context.getAllNotes()
+  return notes.sort((a, b) => b.lastUpdatedTime - a.lastUpdatedTime)
+}
+
+const notesAsync = atom<NoteInfo[] | Promise<NoteInfo[]>>(loadNotes())
+
+export const noteAtom = unwrap(notesAsync, (prev) => prev)
+
+// export const noteAtom = atom<NoteInfo[]>(mockupNotes) // as of now taking notes from the mockup notes only but it will take from local files
 
 // can be a number or null if no notes selected
 export const indexOfSelectedNoteAtom = atom<number | null>(null)
@@ -14,6 +22,8 @@ export const indexOfSelectedNoteAtom = atom<number | null>(null)
 // creating new note atom
 export const createEmptyNoteAtom = atom(null, (get, set) => {
   const notes = get(noteAtom)
+
+  if (!notes) return
 
   const title = `Note ${notes.length + 1}` // calculate total number of notes
 
@@ -36,7 +46,7 @@ export const deletingNoteAtom = atom(null, (get, set) => {
   // deleting the note that is currently selected
   const selectedNote = get(selectedNoteAtom)
 
-  if (!selectedNote) {
+  if (!selectedNote || !notes) {
     return // since there are no notes to delete
   }
 
@@ -44,20 +54,31 @@ export const deletingNoteAtom = atom(null, (get, set) => {
     noteAtom,
     notes.filter((note) => note.title !== selectedNote.title)
   )
-
   set(indexOfSelectedNoteAtom, null)
 })
 
-export const selectedNoteAtom = atom((get) => {
+const selectedNoteAtomAsync = atom(async (get) => {
   const notes = get(noteAtom)
   const indexOfSelectedNote = get(indexOfSelectedNoteAtom)
-  if (indexOfSelectedNote == null) {
+  if (indexOfSelectedNote == null || !notes) {
     return null
   }
   const selectedNote = notes[indexOfSelectedNote]
 
+  const contentOfNote = await window.context.readNote(selectedNote.title)
+
   return {
     ...selectedNote,
-    content: `Ich Bin Soura bro ${indexOfSelectedNote}`
+    content: contentOfNote
   }
 })
+
+export const selectedNoteAtom = unwrap(
+  selectedNoteAtomAsync,
+  (prev) =>
+    prev ?? {   // if note content is empty or new
+      title: '',
+      content: '',
+      lastUpdatedTime: Date.now()
+    }
+)

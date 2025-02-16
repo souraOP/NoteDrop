@@ -4,8 +4,8 @@ import { twMerge } from 'tailwind-merge'
 export const cn = (...args: ClassValue[]) => {
   return twMerge(clsx(...args))
 }
-
-const FormatDateHelper = new Intl.DateTimeFormat(window.context.locale, {
+const context = { locale: 'en-US' }
+const FormatDateHelper = new Intl.DateTimeFormat(context.locale, {
   dateStyle: 'medium',
   timeStyle: 'short',
   timeZone: 'IST'
