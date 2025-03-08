@@ -24,12 +24,12 @@ export const useMarkdownEditorContent = () => {
     }
   )
   const handleImmediateNoteTransitionSaving = async () => {
-    if(!selectedNote){
+    if (!selectedNote) {
       return
     }
     handleAutoSave.cancel()
-    const content=editorRef.current?.getMarkdown()
-    if(content != null){
+    const content = editorRef.current?.getMarkdown()
+    if (content != null) {
       await saveNote(content)
     }
   }
